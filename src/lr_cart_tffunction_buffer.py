@@ -184,7 +184,8 @@ def run():
         initial_state = tf.numpy_function(reset_env, [], tf.float32)
 
         with tf.GradientTape() as tape:
-            replay_buffer, reward_sum = run_episode(initial_state,
+            replay_buffer, reward_sum = run_episode(
+                        initial_state,
                         model,
                         replay_buffer,
                         max_steps,
