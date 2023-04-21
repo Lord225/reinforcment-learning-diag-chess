@@ -88,7 +88,7 @@ def get_expected_return(
 
 optimizer = tf.keras.optimizers.Adam(learning_rate=0.01)
 
-#@tf.function
+@tf.function
 def train_step(
     initial_state: tf.Tensor, 
     model: tf.keras.Model, 
@@ -127,7 +127,7 @@ def train_step(
 
 
 train_loss = tf.keras.metrics.Mean(name='train_loss')
-train_summary_writer = tf.summary.create_file_writer(config_file.LOG_DIR) # type: ignore
+train_summary_writer = tf.summary.create_file_writer(config_file.LOG_DIR+"tfv1") # type: ignore
 
 for i in tqdm.tqdm(range(1000)):
     initial_state, info = env.reset()

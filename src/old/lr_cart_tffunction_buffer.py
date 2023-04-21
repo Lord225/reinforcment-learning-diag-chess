@@ -7,6 +7,8 @@ import config_file
 import tensorboard
 
 # shit
+# trying to exress whole thing with tf.functions
+
 env = gym.make("CartPole-v1")
 input_shape = [4] # == env.observation_space.shape
 n_outputs = 2 # == env.action_space.n
@@ -17,8 +19,7 @@ model = tf.keras.models.Sequential([
     tf.keras.layers.Dense(n_outputs)
 ])
 
-train_summary_writer = tf.summary.create_file_writer(config_file.LOG_DIR) #type: ignore
-
+train_summary_writer = tf.summary.create_file_writer(config_file.LOG_DIR+"tfv2") #type: ignore
 
 def env_step(action):
     state, reward, done, _, _ = env.step(action)
