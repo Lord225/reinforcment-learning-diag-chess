@@ -26,17 +26,12 @@ def transform_state_batch(board_state):
 def tf_transform_state_batch(board_state):
     return tf.numpy_function(transform_state_batch, [board_state], [tf.float32])
 
-
 def env_step(action):
     state1, reward1, done1 = env.step_board_obs(int(action))
 
 
     random_action = np.random.randint(0, 4096)
     state2, reward2, done2 = env.step_board_obs(int(random_action))
-
-    if reward1 < 0: 
-        # bad move ends the game 
-        reward1, done = -1, True
 
 
     state = state2
@@ -95,7 +90,7 @@ def run():
         epsilon = max(1 - episode / 500, 0.01)
 
         # run episode
-        state = env.reset()
+        state = env.reset_board()
         state = tf.constant(state)
         (states, action_probs, returns, next_states, dones), total_rewards = run_episode_and_get_history_3(state, 
                                                                                                            actor_model, 
@@ -128,7 +123,6 @@ def run():
                                               optimizer,
                                               n_outputs,
                                               tf_transform_state_batch,
-
                                               )
         # update target network
         if episode % target_update_freq == 0:
