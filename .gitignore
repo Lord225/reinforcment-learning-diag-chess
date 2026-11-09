@@ -6,3 +6,8 @@ __pycache__/
 models/
 retain/
 !models/readme.md
+
+# Generated artifacts are stored outside Git; previous copies are in the cleanup backup.
+/retain/*.h5
+/models/*.h5
+/**/__pycache__/*
